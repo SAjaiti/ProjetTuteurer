@@ -1,1 +1,114 @@
 
+Annexe 1: Installation de TinyOS-2.1.2
+
+Installation des paquets Ubuntu
+
+1-Avant d'installer Tinos sur ubuntu 14.04 il faut inclure les adresses suivantes dans le fichier
+source référentiel sources.list.Cela en éditant le fichier / etc / apt /sources.list comme suit:
+
+SUDO GEDIT / ETC / APT /SOURCES.LIST
+
+2-Inclure les lignes suivantes à la fin du script :
+
+#tinyOS
+deb http://tinyos.stanford.edu/tinyos/dists/ubuntu lucid main
+deb http://tinyos.stanford.edu/tinyos/dists/ubuntu maverick main
+deb http://tinyos.stanford.edu/tinyos/dists/ubuntu natty main
+
+3-Enregistrer et fermer l'application "gedit".
+
+4-Ouvrir la console de terminal et exécutez les commandes suivantes:
+
+sudo apt-get update
+sudo apt-get install tinyos
+
+5-Exécuter les commandes suivantes pour installer Tinos 2.1.2. Lors de cette étape peut-être vous
+serez invité à entrer le mot de passe d'administration.
+
+sudo apt-get install tinyos-2.1.2
+sudo apt-get install subversion
+
+6- Exécuter les commandes suivantes, ceci permettra l'installation des derniers outils de
+MSPGCC, Cela va ajouter la dernière Tinos ® code, qui comprennent les nouveaux pilotes de
+puces msp430x afin d'être en mesure de compiler les iris des plateformes comme suit:
+
+sudo svn checkout http://tinyos-main.googlecode.com/svn/trunk/ tinyos-main-read-only
+sudo cp -R /opt/tinyos-main-read-only /opt/tinyos-2.x
+
+7-Maintenant, utilisez la console du terminal et exécutez la commande suivante, allé à l'intérieur
+de l’installation de TinyOS, comme suit:
+
+cd /opt/tinyos-2.1.2
+
+8-Maintenant, voir la liste des fichiers en utilisant la commande ls et vérifier si il ya un fichier
+nommé ' tinyos.sh '. Si ce n’est pas le cas il faut le créer. Ceci peut être accompli en utilisant
+gedit, il faut s’assurer que le contenu de ' tinyos.sh'correspond avec le contenu ci-dessous:
+
+#! /usr/bin/env bash
+# Here we setup the environment
+# variables needed by the tinyos
+# make system
+echo "Setting up for TinyOS 2.1.2 Repository Version"
+export TOSROOT=
+export TOSDIR=
+export MAKERULES=
+TOSROOT="/opt/tinyos-2.1.2"
+TOSDIR="$TOSROOT/tos"
+CLASSPATH=$CLASSPATH:$TOSROOT/support/sdk/java:.:$TOSROOT/support/sdk/java/t
+inyos.jar
+MAKERULES="$TOSROOT/support/make/Makerules"
+export TOSROOT
+export TOSDIR
+export CLASSPATH
+export MAKERULES
+
+9-Enregistrez le fichier et quitter
+
+10-Maintenant, utilisez la console du terminal et exécutez la commande suivante, allé à
+l'intérieur de l’installation de TinyOS, comme suit:
+
+cd /opt/tinyos-2.x
+
+11-Maintenant, la liste des fichiers en utilisant la commande ls et vérifier si il ya un fichier
+nommé ' tinyos.sh '. Si ce n’est pas le cas il faut le créer. Ceci peut être accompli en utilisant
+gedit, il faut s’assurer que le contenu de ' tinyos.sh'correspond avec le contenu ci-dessous:
+
+#! / Usr / bin / env bash
+# Ici nous configurer l'environnement
+# variables requises par les TinyOS
+Système d'appoint d'#
+echo "Configuration pour TinyOS 2.x référentiel Version"
+l'exportation TOSROOT =
+l'exportation TOSDIR =
+l'exportation MAKERULES =
+TOSROOT = "/ opt / TinyOS-2.x"
+TOSDIR = "$ TOSROOT / tos"
+CLASSPATH = $ CLASSPATH: $ TOSROOT / support / sdk / java:.: $ TOSROOT / support / sdk / java /
+tinyos.jar
+MAKERULES = "$ TOSROOT / support / faire / Makerules"
+l'exportation TOSROOT
+l'exportation TOSDIR
+export CLASSPATH
+MAKERULES d'exportation
+
+12-Enregistrez le fichier et quitter
+
+13- Maintenant, utilisez la console du terminal et exécutez les commandes suivantes
+
+sudo cp /opt/tinyos-2.1.2/tinyos.sh /opt/tinyos-2.x/tinyos.sh
+sudo chmod +x /opt/tinyos-2.x/tinyos.sh
+sudo gedit /opt/tinyos-2.x/tinyos.sh
+
+14-Afin d’utiliser ce dossier comme chemin de TinyOS ROOT, ouvrir la console de terminal et
+exécuter la commande suivante:
+
+sudo gedit ~/.bashrc
+
+15-Ajouter les lignes suivantes à la fin du document qui s’ouvre:
+
+#Sourcing Le script de configuration variable TinyOS de l'environnement
+la source /opt/tinyos-2.1.2/ tinyos.sh
+#Sourcing Le script de configuration variable TinyOS de l'environnement
+la source /opt/tinyos-2.x/ tinyos.sh
+
+17 Enregistrez le fichier et fermez l'éditeur. Fermez la console de terminal et redémarrez le PC.
