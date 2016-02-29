@@ -1,0 +1,10 @@
+ 
+ Les réseaux de capteurs sans fil (Wireless Sensor Network - WSN) sont un type
+particulier de réseau Ad-hoc (réseaux sans fil capables de s’organiser sans infrastructure
+définie préalablement), dans lesquels les nœuds sont des "capteurs intelligents". Ils se
+composent généralement d’un grand nombre de capteurs communicants entre eux via des
+liens radio et capables de récolter et de transmettre des données environnementales d’une
+manière autonome. Dans ce type de réseau, les capteurs échangent des informations par
+exemple sur l’environnement pour construire une vue globale de la région contrôlée, qui est
+rendue accessible à l’utilisateur externe par un ou plusieurs nœuds.
+ 

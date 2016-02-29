@@ -1,0 +1,96 @@
+1. Définition des protocoles de routage dans les réseaux de capteurs 
+ 
+ Le routage est une méthode d’acheminement des informations vers une destination
+donnée dans un réseau de connexion. Il est fondamental dans les réseaux de capteurs sans fils,
+vu qu’il n’existe pas d’infrastructure qui gère les informations échangées entre les différents
+nœuds du réseau. En effet, c’est à chaque nœud du réseau de jouer le rôle d’un routeur.
+Comme nous l’avons déjà vu, l’architecture des réseaux Ad-hoc est caractérisée par l’absence
+d’infrastructure fixe préexistante, à l’inverse des réseaux de télécommunication classiques.
+Un réseau Ad-hoc doit s’organiser automatiquement de façon à être déployé rapidement et
+pouvoir s’adapter aux conditions du trafic et aux différents mouvements pouvant intervenir au
+sein des nœuds mobiles.
+ 
+2. Contraintes de conception des protocoles de routage pour RCSF
+ 
+ Offrir un support pour pouvoir effectuer des communications multi-sauts fiables.
+ Assurer un routage optimal si possible.
+ Offrir une bonne qualité concernant les temps de latence.
+ Auto-organiser le réseau. 
+ 
+ 3. Les différents protocoles de routage dans les réseaux de capteurs 
+ 
+  1. LEACH 
+ 
+ LEACH (Low-Energy Adaptive Clustering Hierarchy) est un protocole qui choisit
+aléatoirement les nœuds cluster-Head et attribue ce rôle aux différents nœuds selon la
+politique de gestion Round-Robin (c’est-à-dire tourniquet) pour garantir une dissipation
+équitable d’énergie entre les nœuds. Dans le but de réduire la quantité d’informations
+transmises à la station de base, les cluster-Head agrègent les données capturées par les nœuds
+membres qui appartiennent à leur propre cluster, et envoient un paquet agrégé à la station de
+base (voir 2.1). 
+Figure 2.1 Le Clustering dans un RCSF 
+
+ 
+ LEACH est exécuté en deux phases : la phase « set-up » et la phase « steady-state »
+suivant la figure 2.2. Dans la première phase, les clusters Head sont sélectionnés et les
+clusters sont formés, et dans la seconde phase, le transfert de données vers la station de base
+aura lieu. Durant la première phase, le processus d’élection des clusters Head est déclenché
+pour choisir le futur cluster Head. Ainsi, une fraction prédéterminée de nœuds s’élisent
+comme cluster Head selon le schéma d’exécution suivant : durant une période T, un nœud n
+choisit un nombre aléatoire nb dont la valeur est comprise entre 0 et 1 (0 < nb < 1). Si nb est
+inférieure à une valeur seuil alors le nœud n deviendra cluster Head durant la période
+courante, sinon le nœud n devrait rejoindre le cluster Head le plus proche dans son voisinage.
+ 
+  2. PEGASIS 
+
+ Power-Efficient Gathering in Sensor Information Systems (PEGASIS) est une version
+améliorée du protocole LEACH. PEGASIS forme des chaînes plutôt que des clusters de
+nœuds de capteurs afin que chaque nœud transmette et reçoive uniquement des données d’un
+voisin. Un seul nœud est sélectionné à partir de cette chaîne pour transmettre à la station de
+base. L’idée de PEGASIS est qu’il utilise tous les nœuds pour transmettre ou recevoir des
+données avec ses plus proches voisins. Il déplace les données reçues de nœud à nœud, puis les
+données seront agrégées jusqu’à ce qu’elles atteignent tous la station de base. Donc, chaque
+nœud du réseau est tour à tour un chef de file de la chaîne, ainsi que responsable pour
+transmettre l’ensemble des données recueillies et fusionnées par la chaîne de nœuds au niveau
+de la station de base. 
+ Une variante de PEGASIS appelée Hierarchical PEGASIS a été conçue afin
+d’améliorer PEGASIS. 
+
+  3. TEEN
+ 
+ TEEN est conçu pour être sensible à des changements soudains des attributs tels que la
+température. La réactivité est importante pour les applications critiques dont le réseau
+fonctionne dans un mode réactif. L’architecture du réseau de capteurs est basée sur un
+groupement hiérarchique où les nœuds forment des clusters et ce processus va se répéter
+jusqu’à ce que la station de base soit atteinte. 
+ 
+ 
+ Au début, les nœuds écoutent le médium continuellement et lorsque la valeur captée
+du paramètre contrôlé dépasse le seuil Hard, le nœud transmet l’information. La valeur captée
+est stockée dans une variable interne appelée SV. Puis, les nœuds ne transmettront des
+données que si la valeur courante du paramètre contrôlé est supérieure au seuil hard HT ou
+diffère du SV d’une quantité égale ou plus grande que la valeur du seuil Soft ST.
+  
+  4. APTEEN 
+ 
+ APTEEN est une extension du TEEN basée sur la capture périodique des données et
+réaction aux événements temps-réel. Quand la station de base forme les clusters, les clusterHead
+diffusent les attributs, les seuils et le plan de transmission à tous les nœuds et effectuent 
+également l’agrégation des données afin d’économiser de l’énergie.
+
+  5. HEED
+ 
+ Younes et Fahmy ont proposé un algorithme de clustering distribué appelé HEED pour
+les réseaux de capteurs. HEED ne fait aucune restriction sur la distribution et la densité des
+nœuds. Il ne dépend pas de la topologie du réseau ni de sa taille mais il suppose que les
+capteurs ont la possibilité de modifier leur puissance de transmission. HEED sélectionne les
+cluster-heads selon un critère hybride regroupant l’énergie restante des nœuds et un second
+paramètre tel que le degré des nœuds. Il vise à réaliser une distribution uniforme des clusters
+Head dans le réseau et à générer des clusters équilibrés en taille. Son problème réside dans la
+détermination du nombre optimal des clusters. De plus, HEED ne précise pas de protocole
+particulier à utiliser pour la communication entre les clusters Head et le sink. A l’intérieur du
+cluster, le problème ne se pose pas car la communication entre les membres du cluster et le
+cluster head est directe (à un saut). D’autre part, avec HEED, la topologie en clusters ne
+réalise pas de consommation minimale d’énergie dans les communications intra-cluster et les
+clusters générés ne sont pas équilibrés en taille.
+ 
